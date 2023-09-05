@@ -4,17 +4,49 @@
 ...
 
 ==== Step 1: Install AWS
-...
+[cols="1,1,1,1"]
+|===
+|Component|Description|Container|Script
+
+|AWS
+|REST interface for Avaloq Core Banking Platform
+|link
+|link
+|===
 
 ==== Step 2: Setup Kafka Strimzi
-...
+[cols="1,1,1,1"]
+|===
+|Component|Description|Container|Script
+
+|tbd
+|tbd
+|link
+|link
+|===
 
 ==== Step 3: Install BDE
-...
+[cols="1,1,1,1"]
+|===
+|Component|Description|Container|Script
+
+|tbd
+|tbd
+|link
+|link
+|===
+
 
 ==== Step 4: Prepare the Caching Database
-...
+[cols="1,1,1,1"]
+|===
+|Component|Description|Container|Script
 
+|tbd
+|tbd
+|link
+|link
+|===
 
 === CAPI components
 CAPI components will be deployed as https://www.oracle.com/cloud/cloud-native/container-instances[container instances]
