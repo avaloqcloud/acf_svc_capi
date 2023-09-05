@@ -3,10 +3,7 @@ Module to deploy CAPI on top of the foundation
 
 [cols="1,1,1,1"]
 |===
-|Component. header row
-|Description
-|Container
-|Script
+|Component|Description|Container|Script
 
 |api-appl
 |Pulls data from Kafka and stores data into the database
