@@ -3,12 +3,23 @@ Module to deploy CAPI on top of the foundation
 
 [cols="1,1"]
 |===
-|Cell in column 1, row 1 
-|Cell in column 2, row 1 
+|Component
+|Description
+|Container
+|Script
 
-|Cell in column 1, row 2
-|Cell in column 2, row 2
+|api-appl
+|Pulls data from Kafka and stores data into the database
+|link
+|link
 
-|Cell in column 1, row 3
-|Cell in column 2, row 3 
+|api-rest
+|Connects to Oracle Microservice DB
+|link
+|link
+
+|api specification
+|Loads Protobuff specifications from Kafka, performs liquibase operation
+|link
+|link
 |===
