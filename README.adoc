@@ -1,5 +1,6 @@
-== capi
-Module to deploy CAPI on top of the foundation
+== Community API Deployment.
+
+CAPI components will be deployed as https://www.oracle.com/cloud/cloud-native/container-instances[container instances]
 
 [cols="1,1,1,1"]
 |===
