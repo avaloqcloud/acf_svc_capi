@@ -1,6 +1,10 @@
-== Community API Deployment
+== Avaloq Development Environment
 
-=== Prepare the Installation
+=== Installing the Components
+
+==== Deploy ACP
+Option 1: ABS Deployment
+Option 2: ADAI image
 
 ==== Install AWS
 [cols="1,1,1,1"]
