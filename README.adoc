@@ -1,7 +1,7 @@
 == capi
 Module to deploy CAPI on top of the foundation
 
-[cols="1,1"]
+[cols="1,1,1,1"]
 |===
 |Component
 |Description
