@@ -1,5 +1,22 @@
-== Community API Deployment.
+== Community API Deployment
 
+=== Install Connector
+...
+
+==== Step 1: Install AWS
+...
+
+==== Step 2: Setup Kafka Strimzi
+...
+
+==== Step 3: Install BDE
+...
+
+=== Step 4: Prepare the Caching Database
+...
+
+
+=== CAPI components
 CAPI components will be deployed as https://www.oracle.com/cloud/cloud-native/container-instances[container instances]
 
 [cols="1,1,1,1"]
