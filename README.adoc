@@ -12,7 +12,7 @@
 ==== Step 3: Install BDE
 ...
 
-=== Step 4: Prepare the Caching Database
+==== Step 4: Prepare the Caching Database
 ...
 
 
