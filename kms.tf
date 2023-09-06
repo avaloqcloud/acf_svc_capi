@@ -1,5 +1,5 @@
-resource "oci_kms_vault" "vault" {
-    compartment_id = var.compartment_id
-    display_name = "Vault"
-    vault_type = "DEFAULT"
+module "vault" {
+  source = "https://github.com/avaloqcloud/acf_resource_vault?ref=v0.0.1"
+  compartment_id = var.compartment_ocid
+  display_name = "Vault"
 }
