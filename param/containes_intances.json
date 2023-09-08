@@ -1,0 +1,148 @@
+[
+  {
+    "container_name": "avaloq-aws",
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-aws:2.45.0",
+    "env_variables": {
+      "RANDFILE": "/opt/avaloq/scratch/.rnd",
+      "WILDFLY_STARTUP_OPTS": "--properties /opt/avaloq/config/secret/avaloq-amiwebservices-appl-default.properties --properties /opt/avaloq/config/secret/avaloq-amiwebservices-appl.properties"
+    },
+    "shape": "CI.Standard.E4.Flex",
+    "cpu": 2,
+    "mem": 4,
+    "volumes": {
+      "scratch": {
+        "path": "/opt/avaloq/scratch",
+        "volume_type": "EMPTYDIR",
+        "backing_store": "MEMORY"
+      },
+      "avaloq-aws-config": {
+        "path": "/opt/avaloq/config/config",
+        "volume_type": "CONFIGFILE",
+        "file_name": "server.properties",
+        "data": "SOFTWARE_DIR=/opt/avaloq/software\nAWS_WAR_DEPLOY_DIR=/opt/avaloq/war-cache\nORACLE_CONFIG_TYPE=jdbc_url\nORACLE_SERVER=default\nORACLE_SID=default\nORACLE_PORT=1522\nORACLE_JDBC_URL=jdbc:mysql://host1\nFEATURE_DISABLE_SAML_VERIFICATION=false\nFEATURE_CLIENT_CALLS=false\nCLIENT_CALLS_ZONE=default\nFEATURE_SRC_POLL=false\nFEATURE_ASYNC_LOAD=true\nPRODUCTION_MODE=true\nHTTP_PROXY=default\nHTTP_PROXY_PORT=default\nNO_PROXY=default\nAPPL_KEYSTORE_ALIAS=AMIWebServicesIdP\nJBOSS_APPL_USER=default\nJBOSS_LOG_LEVEL=INFO\nJBOSS_LOG_FORMAT=json\nJBOSS_DATASOURCE_MAX_POOL_SIZE=400\nJBOSS_DATASOURCE_MIN_POOL_SIZE=50\nJBOSS_DATASOURCE_INIT_POOL_SIZE=50\nACP_AVAILABILITY_POLL_DURATION=PT30S\nACP_AVAILABILITY_CONNECTION_TIMEOUT_DURATION=PT10S\nACP_AVAILABILITY_QUERY_TIMEOUT_DURATION=PT10S\nENDPOINT_FILTER=+/*\nSDS_SERVER_INSTANCE=default\nSDS_SERVER_URL=default\nSDS_SERVER_USERNAME=default\nSDS_USER=default\nPROXY_URL=default\nEXTERNAL_HOST=test\nVALIDATE_RESPONSES=false\nJWT_WHITELIST_ISSUER=true\nJWT_WHITELISTED_AUDIENCE_LIST=AVALOQ\nJWT_REQUIRED_CLAIM_LIST=sub,iss,aud,exp,iat\nJWT_ISSUER_LIST=MedusaIdP,MedusaIDP\nJWT_MAX_VALIDITY=PT8H\nLOG_CONTEXT_REQUEST_ID=cookie:AL_ENV_REQUEST_ID\nLOG_CONTEXT_SESSION_ID=cookie:AL_ENV_SESSION_ID\nPLUGINS_WORLDCHECK_HOST=api-worldcheck.refinitiv.com\nOAUTH2_REDIRECT_ROOT_URL=https://test\nOAUTH2_SUCCESS_REDIRECT=https://test/AWS/oauth2/success.html\nOAUTH2_ERROR_REDIRECT=https://test/AWS/oauth2/error.html\nDEFAULT_BU_ID=default"
+      },
+      "avaloq-aws-secret-1": {
+        "path": "/opt/avaloq/config/secret",
+        "volume_type": "CONFIGFILE",
+        "file_name": "server.properties",
+        "data": "ORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY=\n[root@lrhcpt007771 ~]# cat /tmp/cp/server.properties\nORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY="
+      },
+      "avaloq-aws-secret-2": {
+        "path": "/opt/avaloq/config/secret",
+        "volume_type": "CONFIGFILE",
+        "file_name": "avaloq-amiwebservices-appl-default.properties",
+        "data": "avaloq.session_manager.query_timeout.seconds=${AVALOQ_AWS_REQUEST_TIMEOUT}\nwildfly.statistics-enabled=true"
+      },
+      "avaloq-aws-secret-3": {
+        "path": "/opt/avaloq/config/secret",
+        "volume_type": "CONFIGFILE",
+        "file_name": "avaloq-amiwebservices-appl.properties",
+        "data": "# No custom properties"
+      }
+    }
+  },
+  {
+    "container_name": "avaloq-community-api",
+    "command": ["/bin/sh"],
+    "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-appl:0.53.1",
+    "env_variables": {
+      "LOGGING_LEVEL_ROOT": "INFO",
+      "AVALOQ_COMMUNITY_API_APPL_START_ADMIN": "true",
+      "AVALOQ_COMMUNITY_API_APPL_DB_URL": "jdbc://test",
+      "AVALOQ_COMMUNITY_API_APPL_DB_SCHEMA": "test",
+      "AVALOQ_COMMUNITY_API_APPL_DB_DRIVER_CLASSNAME": "test",
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "",
+      "AVALOQ_COMMUNITY_API_APPL_KAFKA_MESI_BU": "",
+      "AVALOQ_KAFKA_TRANSACTIONAL_ID": "avaloq-community-api",
+      "AVALOQ_COMMUNITY_API_ORACLE_MAX_STRING_LENGTH": "test",
+      "AVALOQ_COMMUNITY_API_CODE_TABLE_CONSUMER_CONCURRENCY": "4",
+      "AVALOQ_COMMUNITY_API_ENTITY_CONSUMER_CONCURRENCY": "4",
+      "AVALOQ_COMMUNITY_API_AUTHORIZATION_CONSUMER_CONCURRENCY": "1",
+      "AVALOQ_COMMUNITY_API_TIME_SERIES_CONSUMER_CONCURRENCY": "1",
+      "AVALOQ_COMMUNITY_API_ROW_ACCESS_CONTROL": "SESSION_BU",
+      "AVALOQ_COMMUNITY_API_APPL_DATASOURCE_MAX_LIFETIME": "1800000",
+      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENABLED": "false",
+      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_QUEUE": "com.avaloq.community.api.async.events.queue",
+      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENTITIES": "",
+      "AVALOQ_COMMUNITY_API_APPL_PERFORMANCE_RECORDING": "true",
+      "AVALOQ_COMMUNITY_API_APPL_JMS_MESSAGE_TIME_TO_LIVE": "86400000",
+      "AVALOQ_COMMUNITY_API_APPL_OPS_STATS_SCHEDULER_FREQUENCY": "DAILY",
+      "AVALOQ_COMMUNITY_API_SKIP_DB_MIGRATOR_VERSION_VERIFICATION": "false"
+    },
+    "shape": "CI.Standard.E4.Flex",
+    "cpu": 2,
+    "mem": 4,
+    "volumes": {
+      "avaloq-community-api-appl-config-secret": {
+        "path": "/opt/avaloq/config",
+        "volume_type": "CONFIGFILE",
+        "file_name": "application.secrets",
+        "data": "spring.liquibase.user=test\n-spring.liquibase.password=test\navaloq.chassis.jms.username=\navaloq.chassis.jms.password=\nspring.datasource.username=test\nspring.datasource.password=test"
+      }
+    }
+  },
+  {
+    "container_name": "avaloq-aca-rest",
+    "command": ["/bin/sh"],
+    "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-rest:0.53.1",
+    "env_variables": {
+      "LOGGING_LEVEL_ROOT": "INFO",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_URL": "jdbc://test",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_SCHEMA": "test",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_DRIVER_CLASSNAME": "test",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENLOGCLAIMS": "sub,iss,avq_roles",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDAUDIENCE": "AVALOQ,EBANKING",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDISSUER": "",
+      "AVALOQ_COMMUNITY_API_REST_POSITION_PILLARS_CACHE_ENABLED": "false",
+      "REQUEST_VALIDATION": "false",
+      "RESPONSE_VALIDATION": "false",
+      "AVALOQ_COMMUNITY_API_REST_DATASOURCE_MAX_LIFETIME": "1800000",
+      "AVALOQ_COMMUNITY_API_REST_WRITE_ASYNCH_READ": "false",
+      "AVALOQ_COMMUNITY_API_ASYNC_WRITE_FEATURE_ENABLED": "false",
+      "AVALOQ_COMMUNITY_API_REST_ASYNC_WRITE_QUEUE": "com.avaloq.community.api.async.write.queue",
+      "AVALOQ_COMMUNITY_API_REST_READ_OWN_WRITE_AWAIT_TIME": "500",
+      "AVALOQ_COMMUNITY_API_REST_READ_INCLUDE_INACTIVE_DEFAULT": "false",
+      "AVALOQ_COMMUNITY_API_REQUEST_TIMEOUT": "120000"
+    },
+    "shape": "CI.Standard.E4.Flex",
+    "cpu": 2,
+    "mem": 4,
+    "volumes": {
+      "avaloq-community-api-appl-config-secret": {
+        "path": "/opt/avaloq/secret",
+        "volume_type": "CONFIGFILE",
+        "file_name": "application.secrets",
+        "data": "AVALOQ_COMMUNITY_API_REST_DB_APPL_USERNAME=test\nAVALOQ_COMMUNITY_API_REST_DB_APPL_PASSWORD=test\navaloq.chassis.security.jwt.authTokenPublicKey=\navaloq.chassis.jms.username=\navaloq.chassis.jms.password="
+      }
+    }
+  },
+  {
+    "container_name": "avaloq-aca-specs",
+    "command": ["/bin/sh"],
+    "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-specifications:0.53.1",
+    "env_variables": {
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "",
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_SHAPES_DIR": "/opt/avaloq/community/api/specifications/shapes",
+      "AVALOQ_COMMUNITY_API_REST_URL_LIST": "https://avaloq-aca-rest:8080",
+      "AVALOQ_COMMUNITY_API_KAFKA_SPECIFICATION_BDE_ENTITIES_WHITELIST": "",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_URL": "jdbc://test",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_SCHEMA": "test",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_DRIVER_CLASSNAME": "test",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DATASOURCE_MAX_LIFETIME": "1800000"
+    },
+    "shape": "CI.Standard.E4.Flex",
+    "cpu": 2,
+    "mem": 4,
+    "volumes": {
+      "avaloq-community-api-specifications-config-secret": {
+        "path": "/opt/avaloq/config",
+        "volume_type": "CONFIGFILE",
+        "file_name": "application.secrets",
+        "data": "spring.datasource.username=test\nspring.datasource.password=test"
+      }
+    }
+  }
+]
