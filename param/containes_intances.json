@@ -18,26 +18,18 @@
       "avaloq-aws-config": {
         "path": "/opt/avaloq/config/config",
         "volume_type": "CONFIGFILE",
-        "file_name": "server.properties",
-        "data": "SOFTWARE_DIR=/opt/avaloq/software\nAWS_WAR_DEPLOY_DIR=/opt/avaloq/war-cache\nORACLE_CONFIG_TYPE=jdbc_url\nORACLE_SERVER=default\nORACLE_SID=default\nORACLE_PORT=1522\nORACLE_JDBC_URL=jdbc:mysql://host1\nFEATURE_DISABLE_SAML_VERIFICATION=false\nFEATURE_CLIENT_CALLS=false\nCLIENT_CALLS_ZONE=default\nFEATURE_SRC_POLL=false\nFEATURE_ASYNC_LOAD=true\nPRODUCTION_MODE=true\nHTTP_PROXY=default\nHTTP_PROXY_PORT=default\nNO_PROXY=default\nAPPL_KEYSTORE_ALIAS=AMIWebServicesIdP\nJBOSS_APPL_USER=default\nJBOSS_LOG_LEVEL=INFO\nJBOSS_LOG_FORMAT=json\nJBOSS_DATASOURCE_MAX_POOL_SIZE=400\nJBOSS_DATASOURCE_MIN_POOL_SIZE=50\nJBOSS_DATASOURCE_INIT_POOL_SIZE=50\nACP_AVAILABILITY_POLL_DURATION=PT30S\nACP_AVAILABILITY_CONNECTION_TIMEOUT_DURATION=PT10S\nACP_AVAILABILITY_QUERY_TIMEOUT_DURATION=PT10S\nENDPOINT_FILTER=+/*\nSDS_SERVER_INSTANCE=default\nSDS_SERVER_URL=default\nSDS_SERVER_USERNAME=default\nSDS_USER=default\nPROXY_URL=default\nEXTERNAL_HOST=test\nVALIDATE_RESPONSES=false\nJWT_WHITELIST_ISSUER=true\nJWT_WHITELISTED_AUDIENCE_LIST=AVALOQ\nJWT_REQUIRED_CLAIM_LIST=sub,iss,aud,exp,iat\nJWT_ISSUER_LIST=MedusaIdP,MedusaIDP\nJWT_MAX_VALIDITY=PT8H\nLOG_CONTEXT_REQUEST_ID=cookie:AL_ENV_REQUEST_ID\nLOG_CONTEXT_SESSION_ID=cookie:AL_ENV_SESSION_ID\nPLUGINS_WORLDCHECK_HOST=api-worldcheck.refinitiv.com\nOAUTH2_REDIRECT_ROOT_URL=https://test\nOAUTH2_SUCCESS_REDIRECT=https://test/AWS/oauth2/success.html\nOAUTH2_ERROR_REDIRECT=https://test/AWS/oauth2/error.html\nDEFAULT_BU_ID=default"
+        "configs": {
+          "server.properties": "SOFTWARE_DIR=/opt/avaloq/software\nAWS_WAR_DEPLOY_DIR=/opt/avaloq/war-cache\nORACLE_CONFIG_TYPE=jdbc_url\nORACLE_SERVER=default\nORACLE_SID=default\nORACLE_PORT=1522\nORACLE_JDBC_URL=jdbc:mysql://host1\nFEATURE_DISABLE_SAML_VERIFICATION=false\nFEATURE_CLIENT_CALLS=false\nCLIENT_CALLS_ZONE=default\nFEATURE_SRC_POLL=false\nFEATURE_ASYNC_LOAD=true\nPRODUCTION_MODE=true\nHTTP_PROXY=default\nHTTP_PROXY_PORT=default\nNO_PROXY=default\nAPPL_KEYSTORE_ALIAS=AMIWebServicesIdP\nJBOSS_APPL_USER=default\nJBOSS_LOG_LEVEL=INFO\nJBOSS_LOG_FORMAT=json\nJBOSS_DATASOURCE_MAX_POOL_SIZE=400\nJBOSS_DATASOURCE_MIN_POOL_SIZE=50\nJBOSS_DATASOURCE_INIT_POOL_SIZE=50\nACP_AVAILABILITY_POLL_DURATION=PT30S\nACP_AVAILABILITY_CONNECTION_TIMEOUT_DURATION=PT10S\nACP_AVAILABILITY_QUERY_TIMEOUT_DURATION=PT10S\nENDPOINT_FILTER=+/*\nSDS_SERVER_INSTANCE=default\nSDS_SERVER_URL=default\nSDS_SERVER_USERNAME=default\nSDS_USER=default\nPROXY_URL=default\nEXTERNAL_HOST=test\nVALIDATE_RESPONSES=false\nJWT_WHITELIST_ISSUER=true\nJWT_WHITELISTED_AUDIENCE_LIST=AVALOQ\nJWT_REQUIRED_CLAIM_LIST=sub,iss,aud,exp,iat\nJWT_ISSUER_LIST=MedusaIdP,MedusaIDP\nJWT_MAX_VALIDITY=PT8H\nLOG_CONTEXT_REQUEST_ID=cookie:AL_ENV_REQUEST_ID\nLOG_CONTEXT_SESSION_ID=cookie:AL_ENV_SESSION_ID\nPLUGINS_WORLDCHECK_HOST=api-worldcheck.refinitiv.com\nOAUTH2_REDIRECT_ROOT_URL=https://test\nOAUTH2_SUCCESS_REDIRECT=https://test/AWS/oauth2/success.html\nOAUTH2_ERROR_REDIRECT=https://test/AWS/oauth2/error.html\nDEFAULT_BU_ID=default"
+        }
       },
       "avaloq-aws-secret-1": {
         "path": "/opt/avaloq/config/secret",
         "volume_type": "CONFIGFILE",
-        "file_name": "server.properties",
-        "data": "ORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY=\n[root@lrhcpt007771 ~]# cat /tmp/cp/server.properties\nORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY="
-      },
-      "avaloq-aws-secret-2": {
-        "path": "/opt/avaloq/config/secret",
-        "volume_type": "CONFIGFILE",
-        "file_name": "avaloq-amiwebservices-appl-default.properties",
-        "data": "avaloq.session_manager.query_timeout.seconds=${AVALOQ_AWS_REQUEST_TIMEOUT}\nwildfly.statistics-enabled=true"
-      },
-      "avaloq-aws-secret-3": {
-        "path": "/opt/avaloq/config/secret",
-        "volume_type": "CONFIGFILE",
-        "file_name": "avaloq-amiwebservices-appl.properties",
-        "data": "# No custom properties"
+        "configs": {
+          "server.properties": "ORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY=",
+          "avaloq-amiwebservices-appl-default.properties": "avaloq.session_manager.query_timeout.seconds=120\nwildfly.statistics-enabled=true",
+          "avaloq-amiwebservices-appl.properties": "# No custom properties"
+        }
       }
     }
   },
@@ -77,8 +69,9 @@
       "avaloq-community-api-appl-config-secret": {
         "path": "/opt/avaloq/config",
         "volume_type": "CONFIGFILE",
-        "file_name": "application.secrets",
-        "data": "spring.liquibase.user=test\n-spring.liquibase.password=test\navaloq.chassis.jms.username=\navaloq.chassis.jms.password=\nspring.datasource.username=test\nspring.datasource.password=test"
+        "configs": {
+          "application.secrets": "spring.liquibase.user=test\n-spring.liquibase.password=test\navaloq.chassis.jms.username=\navaloq.chassis.jms.password=\nspring.datasource.username=test\nspring.datasource.password=test"
+        }
       }
     }
   },
@@ -113,8 +106,9 @@
       "avaloq-community-api-appl-config-secret": {
         "path": "/opt/avaloq/secret",
         "volume_type": "CONFIGFILE",
-        "file_name": "application.secrets",
-        "data": "AVALOQ_COMMUNITY_API_REST_DB_APPL_USERNAME=test\nAVALOQ_COMMUNITY_API_REST_DB_APPL_PASSWORD=test\navaloq.chassis.security.jwt.authTokenPublicKey=\navaloq.chassis.jms.username=\navaloq.chassis.jms.password="
+        "configs": {
+          "application.secrets": "AVALOQ_COMMUNITY_API_REST_DB_APPL_USERNAME=test\nAVALOQ_COMMUNITY_API_REST_DB_APPL_PASSWORD=test\navaloq.chassis.security.jwt.authTokenPublicKey=\navaloq.chassis.jms.username=\navaloq.chassis.jms.password="
+        }
       }
     }
   },
@@ -140,8 +134,9 @@
       "avaloq-community-api-specifications-config-secret": {
         "path": "/opt/avaloq/config",
         "volume_type": "CONFIGFILE",
-        "file_name": "application.secrets",
-        "data": "spring.datasource.username=test\nspring.datasource.password=test"
+        "configs": {
+          "application.secrets": "spring.datasource.username=test\nspring.datasource.password=test"
+        }
       }
     }
   }
