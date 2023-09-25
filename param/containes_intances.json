@@ -1,7 +1,7 @@
 [
   {
     "container_name": "avaloq-aws",
-    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-aws:2.45.0",
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-aws:2.46.1",
     "env_variables": {
       "RANDFILE": "/opt/avaloq/scratch/.rnd",
       "WILDFLY_STARTUP_OPTS": "--properties /opt/avaloq/config/secret/avaloq-amiwebservices-appl-default.properties --properties /opt/avaloq/config/secret/avaloq-amiwebservices-appl.properties"
@@ -15,19 +15,24 @@
         "volume_type": "EMPTYDIR",
         "backing_store": "MEMORY"
       },
+      "war-cache": {
+        "path": "/opt/avaloq/war-cache",
+        "volume_type": "EMPTYDIR",
+        "backing_store": "MEMORY"
+      },
       "avaloq-aws-config": {
         "path": "/opt/avaloq/config/config",
         "volume_type": "CONFIGFILE",
         "configs": {
-          "server.properties": "SOFTWARE_DIR=/opt/avaloq/software\nAWS_WAR_DEPLOY_DIR=/opt/avaloq/war-cache\nORACLE_CONFIG_TYPE=jdbc_url\nORACLE_SERVER=default\nORACLE_SID=default\nORACLE_PORT=1522\nORACLE_JDBC_URL=jdbc:mysql://host1\nFEATURE_DISABLE_SAML_VERIFICATION=false\nFEATURE_CLIENT_CALLS=false\nCLIENT_CALLS_ZONE=default\nFEATURE_SRC_POLL=false\nFEATURE_ASYNC_LOAD=true\nPRODUCTION_MODE=true\nHTTP_PROXY=default\nHTTP_PROXY_PORT=default\nNO_PROXY=default\nAPPL_KEYSTORE_ALIAS=AMIWebServicesIdP\nJBOSS_APPL_USER=default\nJBOSS_LOG_LEVEL=INFO\nJBOSS_LOG_FORMAT=json\nJBOSS_DATASOURCE_MAX_POOL_SIZE=400\nJBOSS_DATASOURCE_MIN_POOL_SIZE=50\nJBOSS_DATASOURCE_INIT_POOL_SIZE=50\nACP_AVAILABILITY_POLL_DURATION=PT30S\nACP_AVAILABILITY_CONNECTION_TIMEOUT_DURATION=PT10S\nACP_AVAILABILITY_QUERY_TIMEOUT_DURATION=PT10S\nENDPOINT_FILTER=+/*\nSDS_SERVER_INSTANCE=default\nSDS_SERVER_URL=default\nSDS_SERVER_USERNAME=default\nSDS_USER=default\nPROXY_URL=default\nEXTERNAL_HOST=test\nVALIDATE_RESPONSES=false\nJWT_WHITELIST_ISSUER=true\nJWT_WHITELISTED_AUDIENCE_LIST=AVALOQ\nJWT_REQUIRED_CLAIM_LIST=sub,iss,aud,exp,iat\nJWT_ISSUER_LIST=MedusaIdP,MedusaIDP\nJWT_MAX_VALIDITY=PT8H\nLOG_CONTEXT_REQUEST_ID=cookie:AL_ENV_REQUEST_ID\nLOG_CONTEXT_SESSION_ID=cookie:AL_ENV_SESSION_ID\nPLUGINS_WORLDCHECK_HOST=api-worldcheck.refinitiv.com\nOAUTH2_REDIRECT_ROOT_URL=https://test\nOAUTH2_SUCCESS_REDIRECT=https://test/AWS/oauth2/success.html\nOAUTH2_ERROR_REDIRECT=https://test/AWS/oauth2/error.html\nDEFAULT_BU_ID=default"
+          "server.properties": "SOFTWARE_DIR=/opt/avaloq/software\nAWS_WAR_DEPLOY_DIR=/opt/avaloq/war-cache\nORACLE_CONFIG_TYPE=jdbc_url\nORACLE_SERVER=default\nORACLE_SID=default\nORACLE_PORT=1522\nORACLE_JDBC_URL=jdbc:oracle:thin:@//acp.sub09210916211.capi.oraclevcn.com:1522/acp\nFEATURE_DISABLE_SAML_VERIFICATION=true\nFEATURE_CLIENT_CALLS=true\nCLIENT_CALLS_ZONE=default\nFEATURE_SRC_POLL=false\nFEATURE_ASYNC_LOAD=true\nPRODUCTION_MODE=true\nHTTP_PROXY=default\nHTTP_PROXY_PORT=default\nNO_PROXY=default\nAPPL_KEYSTORE_ALIAS=AMIWebServicesIdP\nJBOSS_APPL_USER=avaloq\nJBOSS_LOG_LEVEL=INFO\nJBOSS_LOG_FORMAT=json\nJBOSS_DATASOURCE_MAX_POOL_SIZE=400\nJBOSS_DATASOURCE_MIN_POOL_SIZE=5\nJBOSS_DATASOURCE_INIT_POOL_SIZE=5\nACP_AVAILABILITY_POLL_DURATION=PT30S\nACP_AVAILABILITY_CONNECTION_TIMEOUT_DURATION=PT10S\nACP_AVAILABILITY_QUERY_TIMEOUT_DURATION=PT10S\nENDPOINT_FILTER=+/*\nSDS_SERVER_INSTANCE=default\nSDS_SERVER_URL=default\nSDS_SERVER_USERNAME=default\nSDS_USER=default\nPROXY_URL=default\nEXTERNAL_HOST=demo-constellation.rbc.8hjkof51dd-sandbox.avaloq.com\nVALIDATE_RESPONSES=false\nJWT_WHITELIST_ISSUER=true\nJWT_WHITELISTED_AUDIENCE_LIST=AVALOQ,EBANKING\nJWT_REQUIRED_CLAIM_LIST=sub,iss,aud,exp,iat\nJWT_ISSUER_LIST=MedusaIDP,psd2applidp\nJWT_MAX_VALIDITY=PT8H\nLOG_CONTEXT_REQUEST_ID=cookie:AL_ENV_REQUEST_ID\nLOG_CONTEXT_SESSION_ID=cookie:AL_ENV_SESSION_ID\nPLUGINS_WORLDCHECK_HOST=api-worldcheck.refinitiv.com\nPLUGINS_WORLDCHECK_OVERRIDE_CONTENT_TYPE=application/json\nOAUTH2_REDIRECT_ROOT_URL=https://demo-constellation.rbc.8hjkof51dd-sandbox.avaloq.com\nOAUTH2_SUCCESS_REDIRECT=https://demo-constellation.rbc.8hjkof51dd-sandbox.avaloq.com/AWS/oauth2/success.html\nOAUTH2_ERROR_REDIRECT=https://demo-constellation.rbc.8hjkof51dd-sandbox.avaloq.com/AWS/oauth2/error.html\nDEFAULT_BU_ID=default\nLIVENESS_INITIAL_DELAY_SECONDS=600\nLIVENESS_PERIOD_SECONDS=40\nCLIENT_CALL_BU=BU.PUBL"
         }
       },
       "avaloq-aws-secret-1": {
         "path": "/opt/avaloq/config/secret",
         "volume_type": "CONFIGFILE",
         "configs": {
-          "server.properties": "ORACLE_SVC_PASSWORD=test\nSERVER_ADMIN_PWD=test\nORACLE_AWS_PASSWORD=default\nAPPL_KEYSTORE_PASSWORD=default\nAPPL_TRUSTSTORE_PASSWORD=default\nJBOSS_APPL_USER_PASSWORD=default\nSDS_SERVER_PASSWORD=default\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY=",
-          "avaloq-amiwebservices-appl-default.properties": "avaloq.session_manager.query_timeout.seconds=120\nwildfly.statistics-enabled=true",
+          "server.properties": "ORACLE_SVC_PASSWORD=<removed>\nSERVER_ADMIN_PWD=<removed>\nORACLE_AWS_PASSWORD=<removed>\nAPPL_KEYSTORE_PASSWORD=<removed>\nAPPL_TRUSTSTORE_PASSWORD=<removed>\nJBOSS_APPL_USER_PASSWORD=<removed>\nSDS_SERVER_PASSWORD=<removed>\nPLUGINS_WORLDCHECK_SECRET=\nPLUGINS_WORLDCHECK_API_KEY=",
+          "avaloq-amiwebservices-appl-default.properties": "avaloq.session_manager.query_timeout.seconds=120\nwildfly.statistics-enabled=true\nORACLE_SVC_USER=DIR_SVC\nORACLE_AWS_USER=AWS",
           "avaloq-amiwebservices-appl.properties": "# No custom properties"
         }
       }
@@ -37,30 +42,36 @@
     "container_name": "avaloq-community-api",
     "command": ["/bin/sh"],
     "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
-    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-appl:0.53.1",
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-appl:0.65.0",
     "env_variables": {
       "LOGGING_LEVEL_ROOT": "INFO",
       "AVALOQ_COMMUNITY_API_APPL_START_ADMIN": "true",
-      "AVALOQ_COMMUNITY_API_APPL_DB_URL": "jdbc://test",
-      "AVALOQ_COMMUNITY_API_APPL_DB_SCHEMA": "test",
-      "AVALOQ_COMMUNITY_API_APPL_DB_DRIVER_CLASSNAME": "test",
-      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "",
+      "AVALOQ_COMMUNITY_API_APPL_DB_URL": "jdbc:oracle:thin:@//acp.sub09210916211.capi.oraclevcn.com:1522/acp",
+      "AVALOQ_COMMUNITY_API_APPL_DB_SCHEMA": "community_api",
+      "AVALOQ_COMMUNITY_API_APPL_DB_DRIVER_CLASSNAME": "oracle.jdbc.driver.OracleDriver",
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "1",
       "AVALOQ_COMMUNITY_API_APPL_KAFKA_MESI_BU": "",
-      "AVALOQ_KAFKA_TRANSACTIONAL_ID": "avaloq-community-api",
-      "AVALOQ_COMMUNITY_API_ORACLE_MAX_STRING_LENGTH": "test",
+      "AVALOQ_KAFKA_TRANSACTIONAL_ID": "",
+      "AVALOQ_COMMUNITY_API_ORACLE_MAX_STRING_LENGTH": "4000",
       "AVALOQ_COMMUNITY_API_CODE_TABLE_CONSUMER_CONCURRENCY": "4",
       "AVALOQ_COMMUNITY_API_ENTITY_CONSUMER_CONCURRENCY": "4",
       "AVALOQ_COMMUNITY_API_AUTHORIZATION_CONSUMER_CONCURRENCY": "1",
       "AVALOQ_COMMUNITY_API_TIME_SERIES_CONSUMER_CONCURRENCY": "1",
-      "AVALOQ_COMMUNITY_API_ROW_ACCESS_CONTROL": "SESSION_BU",
+      "AVALOQ_COMMUNITY_API_ROW_ACCESS_CONTROL": "ACCESS_CODES",
       "AVALOQ_COMMUNITY_API_APPL_DATASOURCE_MAX_LIFETIME": "1800000",
-      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENABLED": "false",
+      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENABLED": "true",
       "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_QUEUE": "com.avaloq.community.api.async.events.queue",
-      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENTITIES": "",
+      "AVALOQ_COMMUNITY_API_APPL_ASYNC_EVENTS_ENTITIES": "doc_pay,doc_stex,obj_asset,ob_bp",
       "AVALOQ_COMMUNITY_API_APPL_PERFORMANCE_RECORDING": "true",
       "AVALOQ_COMMUNITY_API_APPL_JMS_MESSAGE_TIME_TO_LIVE": "86400000",
       "AVALOQ_COMMUNITY_API_APPL_OPS_STATS_SCHEDULER_FREQUENCY": "DAILY",
-      "AVALOQ_COMMUNITY_API_SKIP_DB_MIGRATOR_VERSION_VERIFICATION": "false"
+      "AVALOQ_COMMUNITY_API_SKIP_DB_MIGRATOR_VERSION_VERIFICATION": "false",
+      "AVALOQ_AWS_API_SPECIFICATIONS_AMI_WEB_SERVICES_URL": "http://avaloq-aws:8080",
+      "AVALOQ_CONTAINER_OFFHEAP_BUFFER_MIB": "",
+      "AVALOQ_COMMUNITY_API_APPL_LOOKUP_IDX_MIGR_PARALLEL_FACTOR": "",
+      "AVALOQ_KAFKA_CLUSTER_BOOTSTRAP_SERVERS": "avaloq-strimzi-kafka-kafka-bootstrap:9093",
+      "AVALOQ_COMMUNITY_API_REST_URL_LIST": "https://avaloq-aca-rest-bc:8080",
+      "AVALOQ_CHASSIS_KAFKA_BOOTSTRAPSERVERS": "avaloq-strimzi-kafka-kafka-bootstrap:9093"
     },
     "shape": "CI.Standard.E4.Flex",
     "cpu": 2,
@@ -70,7 +81,15 @@
         "path": "/opt/avaloq/config",
         "volume_type": "CONFIGFILE",
         "configs": {
-          "application.secrets": "spring.liquibase.user=test\n-spring.liquibase.password=test\navaloq.chassis.jms.username=\navaloq.chassis.jms.password=\nspring.datasource.username=test\nspring.datasource.password=test"
+          "application.secrets": "spring.liquibase.user=community_api\nspring.liquibase.password=<removed>\navaloq.chassis.jms.username=appl\navaloq.chassis.jms.password=<removed>\nspring.datasource.username=community_api_appl\nspring.datasource.password=<removed>\nspring.security.user.name=admin\nspring.security.user.password=<removed>"
+        }
+      },
+      "certificates": {
+        "path": "/opt/avaloq/capi-appl/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIID/zCCAuegAwIBAgIIWMy5JpZiiXUwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwMzlaFw0yNDEwMzAxNDAwNDBaMDAxLjAsBgNVBAMTJWF2YWxv\ncS1hY2EtYXBwbC5hbGwtY29uc3RlbGxhdGlvbi5zdmMwggEiMA0GCSqGSIb3DQEB\nAQUAA4IBDwAwggEKAoIBAQDGjpy9cSKrv9fdQtrbB1EQNDRZS30ODIhPLTKGjmbm\nxgTwiekup/41RGtaUeOxLwSwAw5wRgvtSBHqwWQ26Vlybz1vNjC9WuWpC+n8uRe/\ng4aLeNfVoCJzqzfYK29HahNKSG3HRm10Nu84xpbL5qUwUA5sOCt5RJu5gMjql8O8\nJ62Uhag6XreMWRXN/TBwks67QVu3N0dqKYBzC+iz28iY9N2q2TZ5sIIPdp46hi7p\njEArtJG9yE7vfrUVykgi0yaPs+kQz0bq1N0B3DTLAB3W1TW8vKHRiF/+JVp5Kppr\nFbSH87vOuqGmmUjMKuh3G0kZGvQ2Dbn9xgvr5wgAhUMdAgMBAAGjggEVMIIBETAO\nBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIw\nADAdBgNVHQ4EFgQURwJoSRKy67epaJuCLAoos+RYmgcwHwYDVR0jBBgwFoAUdWHt\ngZRw/U6ZyhCyhhCKLm88wUowZQYDVR0RBF4wXIIlYXZhbG9xLWFjYS1hcHBsLmFs\nbC1jb25zdGVsbGF0aW9uLnN2Y4IzYXZhbG9xLWFjYS1hcHBsLmFsbC1jb25zdGVs\nbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDUzYmE2\nYjA4LTFmNjMtNDNiYS05MzAyLWEzOTViM2MwNmMwZTANBgkqhkiG9w0BAQsFAAOC\nAQEAX29p91ASpl8C5gIh4qY4LbvVETJsDZU6VBacPvre08Trr9ECauRZkIhZ5XA3\njBB/FCr+1oAMT3NgtNT3ihCWK73VbQ1fCUiLJNi/Cqf64SJxbi3IyB6Qbj43t4ow\nXMjodPQ8yifJMfX6dvCn17TKk6cw8NP7ygpQ6dbbwXGGdgzmEl+VqrAz0HJlKzBd\nN/ke8W8tJDeZrV11T3goW2omUihLa1k9dua0nmKmvBBI7XbgkMzGgCJ0u3zUE0YM\nf4xyBsPsRu+NaHBOpyHoH9L6nQHyxERTORrdItrpAKp3KAzHlh8f5qPpB90fSQrO\nYGo9szJNSGXtP2X5WhOjC/mUBA==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
         }
       }
     }
@@ -79,35 +98,135 @@
     "container_name": "avaloq-aca-rest",
     "command": ["/bin/sh"],
     "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
-    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-rest:0.53.1",
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-rest:0.65.0",
     "env_variables": {
       "LOGGING_LEVEL_ROOT": "INFO",
-      "AVALOQ_COMMUNITY_API_REST_DB_APPL_URL": "jdbc://test",
-      "AVALOQ_COMMUNITY_API_REST_DB_APPL_SCHEMA": "test",
-      "AVALOQ_COMMUNITY_API_REST_DB_APPL_DRIVER_CLASSNAME": "test",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_URL": "jdbc:oracle:thin:@//acp.sub09210916211.capi.oraclevcn.com:1522/acp",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_SCHEMA": "community_api",
+      "AVALOQ_COMMUNITY_API_REST_DB_APPL_DRIVER_CLASSNAME": "oracle.jdbc.driver.OracleDriver",
       "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENLOGCLAIMS": "sub,iss,avq_roles",
       "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDAUDIENCE": "AVALOQ,EBANKING",
-      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDISSUER": "",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDISSUER": "MedusaIDP",
       "AVALOQ_COMMUNITY_API_REST_POSITION_PILLARS_CACHE_ENABLED": "false",
+      "AVALOQ_COMMUNITY_API_REST_BOOK_PILLARS_CACHE_ENABLED": "false",
+      "AVALOQ_COMMUNITY_API_REST_CREDIT_RISK_PILLARS_CACHE_ENABLED": "false",
       "REQUEST_VALIDATION": "false",
       "RESPONSE_VALIDATION": "false",
       "AVALOQ_COMMUNITY_API_REST_DATASOURCE_MAX_LIFETIME": "1800000",
       "AVALOQ_COMMUNITY_API_REST_WRITE_ASYNCH_READ": "false",
       "AVALOQ_COMMUNITY_API_ASYNC_WRITE_FEATURE_ENABLED": "false",
       "AVALOQ_COMMUNITY_API_REST_ASYNC_WRITE_QUEUE": "com.avaloq.community.api.async.write.queue",
+      "AVALOQ_COMMUNITY_API_ASYNC_WRITE_RESULTS_QUEUE": "com.avaloq.community.api.async.write.results.queue",
       "AVALOQ_COMMUNITY_API_REST_READ_OWN_WRITE_AWAIT_TIME": "500",
       "AVALOQ_COMMUNITY_API_REST_READ_INCLUDE_INACTIVE_DEFAULT": "false",
-      "AVALOQ_COMMUNITY_API_REQUEST_TIMEOUT": "120000"
+      "AVALOQ_COMMUNITY_API_REQUEST_TIMEOUT": "120000",
+      "AVALOQ_AWS_API_SPECIFICATIONS_AMI_WEB_SERVICES_URL": "http://10.0.1.235:8080",
+      "AVALOQ_COMMUNITY_API_ASYNC_JMS_INITIAL_REDELIVERY_DELAY": "100",
+      "AVALOQ_COMMUNITY_API_ASYNC_JMS_MAXIMUM_REDELIVERIES": "5",
+      "AVALOQ_COMMUNITY_API_ASYNC_JMS_MAXIMUM_REDELIVERY_DELAY": "60000",
+      "AVALOQ_COMMUNITY_API_ASYNC_JMS_USE_EXPONENTIAL_BACK_OFF": "true",
+      "AVALOQ_COMMUNITY_API_ASYNC_JMS_BACK_OFF_MULTIPLIER": "5"
     },
     "shape": "CI.Standard.E4.Flex",
     "cpu": 2,
     "mem": 4,
     "volumes": {
-      "avaloq-community-api-appl-config-secret": {
+      "avaloq-community-api-rest-config-secret": {
         "path": "/opt/avaloq/secret",
         "volume_type": "CONFIGFILE",
         "configs": {
-          "application.secrets": "AVALOQ_COMMUNITY_API_REST_DB_APPL_USERNAME=test\nAVALOQ_COMMUNITY_API_REST_DB_APPL_PASSWORD=test\navaloq.chassis.security.jwt.authTokenPublicKey=\navaloq.chassis.jms.username=\navaloq.chassis.jms.password="
+          "application.secrets": "AVALOQ_COMMUNITY_API_REST_DB_APPL_USERNAME=community_api_appl\nAVALOQ_COMMUNITY_API_REST_DB_APPL_PASSWORD=<removed>\navaloq.chassis.security.jwt.authTokenPublicKey=\navaloq.chassis.jms.username=\navaloq.chassis.jms.password=<removed>"
+        }
+      },
+      "https-cert-community-api-rest": {
+        "path": "/opt/avaloq/capi-rest/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIID/zCCAuegAwIBAgIIYburg9nSfHcwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwNTNaFw0yNDEwMzAxNDAwNTRaMDAxLjAsBgNVBAMTJWF2YWxv\ncS1hY2EtcmVzdC5hbGwtY29uc3RlbGxhdGlvbi5zdmMwggEiMA0GCSqGSIb3DQEB\nAQUAA4IBDwAwggEKAoIBAQC2uqvTwcvLKsuTfYNBJ8WvLVyLFkrnamM/0bDNQa82\nCfe68y9q5aqIZAA4fhNII7DaTrJIfovJ/7AsCth0Ov3MUsE5bUm/t9u8++W9gDPE\nG7bKmCCk32f4YyAqXHEHSmmU4s9fE/hQjF/xbTtMlGtQNtMmU9reeZ6gu7RiGhiH\nZTSrjrrp1f3lkVa54MbfulQke8k+Z6BR0nRzboG88kg6KYpsgeXLG/TdBu/DppED\nYXXgZtuLCh07Hdkuali/0KnG8QwBMg3qABjfQcAij1JLupRS1cYRp8RsA/A9vHOx\nc3AL6Jb+4oVqLQGdG6GZQmuy7hecAgw5pvCCmkvLP8fHAgMBAAGjggEVMIIBETAO\nBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIw\nADAdBgNVHQ4EFgQU/+yNVTrxdxWYr5TiDVifxKB38I8wHwYDVR0jBBgwFoAUdWHt\ngZRw/U6ZyhCyhhCKLm88wUowZQYDVR0RBF4wXIIlYXZhbG9xLWFjYS1yZXN0LmFs\nbC1jb25zdGVsbGF0aW9uLnN2Y4IzYXZhbG9xLWFjYS1yZXN0LmFsbC1jb25zdGVs\nbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDRjMWU3\nYzRmLTc0N2EtNDMwNC05OWUwLTc1NDMwMTczMjkyYTANBgkqhkiG9w0BAQsFAAOC\nAQEABsMvSZn3O9jaqOQgzOCsOaUt15pyjNHSVBpdWt5emFEBf71/kxpz3rjHGyIw\n0QT/Mjq21rYFFj8dQEBEbyuqvhdMUJmqjYSUl3Ac1Y4CNTlm2O9bTs3foeMRs0cX\nvMxsmnR7Y4HHmdhA2ntG+vmjkl6zGF2fxktDy6PvrqBcbOPkD1lH/9vWbXWsQu8D\nDVQcZoLzP2ppntQ7hzq0DpZBmy1p31dGEx89DTngxA1/Yh8MUbHn8ZcZNyuai4wb\nHCsmnaoYctYilp1quSNLRWF//+trMkF+xNowqXdHIUbPgzHqycDp+E07rBgZPJHu\nuprIgIM2CfYJ48UJbyvnnO8S3g==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+
+        }
+      },
+      "https-cert-community-api-aca-specifications": {
+        "path": "/opt/avaloq/capi-specs/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIIEAjCCAuqgAwIBAgIIVSEVCGdmxmQwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwMzJaFw0yNDEwMzAxNDAwMzNaMDExLzAtBgNVBAMTJmF2YWxv\ncS1hY2Etc3BlY3MuYWxsLWNvbnN0ZWxsYXRpb24uc3ZjMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEA43RXvfvohtDxw1DJoOeh70Wic8H/dzO5sKpvaErb\nHHP3XGQ/16dlbx5me+y90/4dRn535L6LVoNErO5zZ4qQasHYCDcYjYjQFozBfPW/\n6mJPd6va8xff3lGScCVLsMMrgshSBdiXyLrqZZVGslT9H+FjybIIii6rkrh8OzD0\nNlUSnXUNR79v3tGmxXRz9LnRaoIuxZY7WdtT8RdHumdvqFkibiSYZU48wfTFvm63\nWFVY5HbVcisZkn2TXbkklt+fiYvijLRCzV0XIo/XH0F26qN9/Tnjm8+jDA1QXppt\npKujjxKscATHctKBGG24UqMux1xpA5W2A8A/jkU1IM7bjQIDAQABo4IBFzCCARMw\nDgYDVR0PAQH/BAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQC\nMAAwHQYDVR0OBBYEFNZNVjXHkqHLPBiqJVGzOrntclmYMB8GA1UdIwQYMBaAFHVh\n7YGUcP1OmcoQsoYQii5vPMFKMGcGA1UdEQRgMF6CJmF2YWxvcS1hY2Etc3BlY3Mu\nYWxsLWNvbnN0ZWxsYXRpb24uc3ZjgjRhdmFsb3EtYWNhLXNwZWNzLmFsbC1jb25z\ndGVsbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDgw\nYjFkMTg5LTc2ZTAtNDZhMy1hNjZhLTFhOWQ2OWUzZjE0YzANBgkqhkiG9w0BAQsF\nAAOCAQEAuw79vC0L/cI05CQOAMw215RtS4aPILk50ddQShq+bOBE+RYEXK1fS0vB\nm6FDsNisHgHf8l6vJzVJtfvWJBZV7chgFQtYjEK4AMzWGpOWN8NhdWMjvv5RwxEq\nrRO+3XhPdzTqovJpEO6xOtbsKAclFVEwsjYCn+7jSY9NTVKRz+o/fFOrwKjmnkUz\nJ3SLZW31+6icvlvU7e76COlQtsERORjESu8zm6mgoHg24cfOnsyW3TRYQZw2vPmh\nMYO2RGcS2notOvGnzPXs3xyqhELRBRck0mZshR0Fyahs0GjaC0g2cX1hfS6/forL\n+VHTYlVjlpmF3SvC7BQJE6fKebKPog==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
+        }
+      }
+    }
+  },
+  {
+    "container_name": "avaloq-aca-specs",
+    "command": ["/bin/java"],
+    "arguments": ["-XX:MaxRAMPercentage=90", "-XX:InitialRAMPercentage=70", "-XX:+DisableExplicitGC", "-XX:+UseG1GC", " --add-modules java.se", "--add-exports java.base/jdk.internal.ref=ALL-UNNAMED", "--add-opens java.base/java.lang=ALL-UNNAMED","--add-opens java.base/java.nio=ALL-UNNAMED", "--add-opens java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens java.management/sun.management=ALL-UNNAMED", "--add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED", "-jar avaloq-community-api-specifications-0.65.0.jar"],
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-specifications:0.65.0",
+    "env_variables": {
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "1",
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_SHAPES_DIR": "/opt/avaloq/community/api/specifications/shapes",
+      "AVALOQ_COMMUNITY_API_REST_URL_LIST": "https://10.0.1.90:8080",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_URL": "jdbc:oracle:thin:@//acp.sub09210916211.capi.oraclevcn.com:1522/acp",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_SCHEMA": "community_api",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_DRIVER_CLASSNAME": "oracle.jdbc.driver.OracleDriver",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DATASOURCE_MAX_LIFETIME": "1800000",
+      "AVALOQ_AWS_API_SPECIFICATIONS_AMI_WEB_SERVICES_URL": "http://10.0.1.235:8080",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_SECURITY_ENABLED": "true",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENLOGCLAIMS": "sub,iss,avq_roles,avq_bu,aud",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDAUDIENCE": "AVALOQ,EBANKING",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDISSUER": "MedusaIDP"
+    },
+    "shape": "CI.Standard.E4.Flex",
+    "cpu": 2,
+    "mem": 4,
+    "volumes": {
+      "avaloq-community-api-specifications-shapes": {
+        "path": "/opt/avaloq/community/api/specifications/shapes",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "crypto-plugin-acp-business-partner.yml": "entities:\n  obj-bp:\n    shapes:\n      - name: crypto-business-partner\n        version: 1.0.0\n        content: |\n          {\n            id\n            extn{\n              bpNr{\n                val\n              }\n              bpSym{\n                val\n              }\n            }\n            objNameList {\n              dateValid\n              dateValidTo\n              name\n            }\n          }",
+          "crypto-plugin-acp-portfolio-shape.yml": "entities:\n  obj-cont:\n    shapes:\n      - name: crypto-portfolio\n        version: 1.0.1\n        content: |\n          {\n            id\n            bp\n            bu\n            extn{\n                contSym\n            }\n            sortNr\n            refCurryList\n          }",
+          "crypto-plugin-acp-position-shape.yml": "entities:\n  obj-pos:\n    shapes:\n      - name: crypto-position\n        version: 1.0.0\n        content: |\n          {\n            id\n            currValPos\n            #qty\n            bu {\n              _href\n              id\n              keyList {\n                objKey {\n                  _href\n                  id\n                  intlId\n                }\n                val\n              }\n            }\n            asset {\n              _href\n              id\n              keyList {\n                objKey {\n                  _href\n                  id\n                  intlId\n                }\n                val\n              }\n            }\n          }"
+        }
+      },
+      "avaloq-community-api-specifications-config-secret": {
+        "path": "/opt/avaloq/config",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "application.secrets": "spring.datasource.username=community_api\nspring.datasource.password=<removed>\navaloq.chassis.security.jwt.authTokenPublicKey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlyAKyF5/tJGg2e7VQPwmt8LeH77llDJSw87Lv4lntt5BVd/Fy+muGjgKJSikNy3b4SRuD2SefmmjnPdWKjyiJIJTansR/2+5LsVtePXYEP4F6fkQpjXeqyQl9VE/BwxiZ0moGI1g2K0V2VLeBB0Lhg6eG5FDarj468FC3XV2p46e3xT5Y+53c4VsLEYcM/Nt0p8Sy8YI8V9I8WojupGv/XJRtkB/vKmZFCBwUv4Ej++s6f7dx5bmF+Ui0wMU1OLW1N7vTckjyFzsqqPIOelcsAY4sTrpbmrO7aApfArkwUrk/FyM6w8CvnVtj6+KiVbmtg4ENlTUQhcb6lTdg4u4jwIDAQAB"
+        }
+      },
+      "https-cert-community-api-rest": {
+        "path": "/opt/avaloq/capi-rest/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIID/zCCAuegAwIBAgIIYburg9nSfHcwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwNTNaFw0yNDEwMzAxNDAwNTRaMDAxLjAsBgNVBAMTJWF2YWxv\ncS1hY2EtcmVzdC5hbGwtY29uc3RlbGxhdGlvbi5zdmMwggEiMA0GCSqGSIb3DQEB\nAQUAA4IBDwAwggEKAoIBAQC2uqvTwcvLKsuTfYNBJ8WvLVyLFkrnamM/0bDNQa82\nCfe68y9q5aqIZAA4fhNII7DaTrJIfovJ/7AsCth0Ov3MUsE5bUm/t9u8++W9gDPE\nG7bKmCCk32f4YyAqXHEHSmmU4s9fE/hQjF/xbTtMlGtQNtMmU9reeZ6gu7RiGhiH\nZTSrjrrp1f3lkVa54MbfulQke8k+Z6BR0nRzboG88kg6KYpsgeXLG/TdBu/DppED\nYXXgZtuLCh07Hdkuali/0KnG8QwBMg3qABjfQcAij1JLupRS1cYRp8RsA/A9vHOx\nc3AL6Jb+4oVqLQGdG6GZQmuy7hecAgw5pvCCmkvLP8fHAgMBAAGjggEVMIIBETAO\nBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIw\nADAdBgNVHQ4EFgQU/+yNVTrxdxWYr5TiDVifxKB38I8wHwYDVR0jBBgwFoAUdWHt\ngZRw/U6ZyhCyhhCKLm88wUowZQYDVR0RBF4wXIIlYXZhbG9xLWFjYS1yZXN0LmFs\nbC1jb25zdGVsbGF0aW9uLnN2Y4IzYXZhbG9xLWFjYS1yZXN0LmFsbC1jb25zdGVs\nbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDRjMWU3\nYzRmLTc0N2EtNDMwNC05OWUwLTc1NDMwMTczMjkyYTANBgkqhkiG9w0BAQsFAAOC\nAQEABsMvSZn3O9jaqOQgzOCsOaUt15pyjNHSVBpdWt5emFEBf71/kxpz3rjHGyIw\n0QT/Mjq21rYFFj8dQEBEbyuqvhdMUJmqjYSUl3Ac1Y4CNTlm2O9bTs3foeMRs0cX\nvMxsmnR7Y4HHmdhA2ntG+vmjkl6zGF2fxktDy6PvrqBcbOPkD1lH/9vWbXWsQu8D\nDVQcZoLzP2ppntQ7hzq0DpZBmy1p31dGEx89DTngxA1/Yh8MUbHn8ZcZNyuai4wb\nHCsmnaoYctYilp1quSNLRWF//+trMkF+xNowqXdHIUbPgzHqycDp+E07rBgZPJHu\nuprIgIM2CfYJ48UJbyvnnO8S3g==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
+        }
+      },
+      "https-cert-community-api-aca-specifications": {
+        "path": "/opt/avaloq/capi-specs/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIIEAjCCAuqgAwIBAgIIVSEVCGdmxmQwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwMzJaFw0yNDEwMzAxNDAwMzNaMDExLzAtBgNVBAMTJmF2YWxv\ncS1hY2Etc3BlY3MuYWxsLWNvbnN0ZWxsYXRpb24uc3ZjMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEA43RXvfvohtDxw1DJoOeh70Wic8H/dzO5sKpvaErb\nHHP3XGQ/16dlbx5me+y90/4dRn535L6LVoNErO5zZ4qQasHYCDcYjYjQFozBfPW/\n6mJPd6va8xff3lGScCVLsMMrgshSBdiXyLrqZZVGslT9H+FjybIIii6rkrh8OzD0\nNlUSnXUNR79v3tGmxXRz9LnRaoIuxZY7WdtT8RdHumdvqFkibiSYZU48wfTFvm63\nWFVY5HbVcisZkn2TXbkklt+fiYvijLRCzV0XIo/XH0F26qN9/Tnjm8+jDA1QXppt\npKujjxKscATHctKBGG24UqMux1xpA5W2A8A/jkU1IM7bjQIDAQABo4IBFzCCARMw\nDgYDVR0PAQH/BAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQC\nMAAwHQYDVR0OBBYEFNZNVjXHkqHLPBiqJVGzOrntclmYMB8GA1UdIwQYMBaAFHVh\n7YGUcP1OmcoQsoYQii5vPMFKMGcGA1UdEQRgMF6CJmF2YWxvcS1hY2Etc3BlY3Mu\nYWxsLWNvbnN0ZWxsYXRpb24uc3ZjgjRhdmFsb3EtYWNhLXNwZWNzLmFsbC1jb25z\ndGVsbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDgw\nYjFkMTg5LTc2ZTAtNDZhMy1hNjZhLTFhOWQ2OWUzZjE0YzANBgkqhkiG9w0BAQsF\nAAOCAQEAuw79vC0L/cI05CQOAMw215RtS4aPILk50ddQShq+bOBE+RYEXK1fS0vB\nm6FDsNisHgHf8l6vJzVJtfvWJBZV7chgFQtYjEK4AMzWGpOWN8NhdWMjvv5RwxEq\nrRO+3XhPdzTqovJpEO6xOtbsKAclFVEwsjYCn+7jSY9NTVKRz+o/fFOrwKjmnkUz\nJ3SLZW31+6icvlvU7e76COlQtsERORjESu8zm6mgoHg24cfOnsyW3TRYQZw2vPmh\nMYO2RGcS2notOvGnzPXs3xyqhELRBRck0mZshR0Fyahs0GjaC0g2cX1hfS6/forL\n+VHTYlVjlpmF3SvC7BQJE6fKebKPog==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
+        }
+      },
+      "avaloq-community-api-aws-https": {
+        "path": "/opt/avaloq/avaloq-aws/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          ".gitkeep": "aa"
+        }
+      },
+      "jwt-certificates": {
+        "path": "/opt/avaloq/jwt",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "asyncidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDnTCCAoWgAwIBAgIUYXpe3RVADczoSHNht/IfJBenZf4wDQYJKoZIhvcNAQEL\nBQAwXjELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM\nGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDEXMBUGA1UEAwwOV2hpdGVsaXN0ZWRJ\nRFAwHhcNMjIwMjAxMDUzNzIxWhcNMzUxMDExMDUzNzIxWjBeMQswCQYDVQQGEwJB\nVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0\ncyBQdHkgTHRkMRcwFQYDVQQDDA5XaGl0ZWxpc3RlZElEUDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBAOTXOexYE/gba3s4k1wHsXNmKVKxi44LmyBAG1tS\nhVD4txQpl6yttk6pIjeqCAusVVmC1k04CRfsCJSU7eqtd+yARFZUUCnIfKhUoW1F\noS3f8ihQHcrEn4wfR0MJWol+4M5NFDgI3H99SMYEfzeFuOXdEqdF4L4+xUPr25st\nawbXNLUvAiYXtO5E+fFZ8oX/ez96viX1ocXktkRuXvGVlMQqZPLqaMug4PxPKHQG\nnFONbE1+JEY6eW3Bp8/6GO92HCe6bTHcT1iC9VYY1NNEAlRxfs0aVu/K6ylqyXxi\n9Wqr9mavQNK+ucnoR5o4TEhw+OPNCGQV044UfQkQ9NA/51MCAwEAAaNTMFEwHQYD\nVR0OBBYEFDMJAuU3HKBYgUma/9H10YDu6pc0MB8GA1UdIwQYMBaAFDMJAuU3HKBY\ngUma/9H10YDu6pc0MA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB\nAOMOAjjEmvBK43bgNiE4/SKUitdlukpnMqxlH1kHKeTL0vs8OU9Glsr7N5eVRXDI\nyl7a8OIJHOX9RXxByAFDdJuGVnL62k8QzbY+fHtO3xMhmj+KDnTXS4CEPuFjtaDQ\n4IjysKIOG3y2gdbjt6qusxWDJu/akbpyTIbcaw/5RGQ9hRCLeC/UQ4RANCdYAc2m\nMS35Qgse887G3zATUbBpzS6WJD/ZXKWUoXtFPbq7L1YRiT1YMbWf/jg/mC0KUv0s\nMMx/7ZtCbmFFdftu5kDABFAaaanYs/rf2IaQADuOLt94Pe6n/U6BVZMsWfOge+c7\nFA2eb6dJ+xaolLfRp8TFJi4=\n-----END CERTIFICATE-----",
+          "medusaidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDpDCCAoygAwIBAgIEBBKDeTANBgkqhkiG9w0BAQsFADB8MQswCQYDVQQGEwJD\nSDELMAkGA1UECBMCWkgxDzANBgNVBAcTBlp1cmljaDEcMBoGA1UEChMTQXZhbG9x\nIEV2b2x1dGlvbiBBRzEOMAwGA1UECxMFRnJvbnQxITAfBgNVBAMTGEF2YWxvcSBG\ncm9udCBUZXN0IE1lZHVzYTAeFw0xODA4MjExMjE1MTJaFw0yODA4MTgxMjE1MTJa\nMHwxCzAJBgNVBAYTAkNIMQswCQYDVQQIEwJaSDEPMA0GA1UEBxMGWnVyaWNoMRww\nGgYDVQQKExNBdmFsb3EgRXZvbHV0aW9uIEFHMQ4wDAYDVQQLEwVGcm9udDEhMB8G\nA1UEAxMYQXZhbG9xIEZyb250IFRlc3QgTWVkdXNhMIIBIjANBgkqhkiG9w0BAQEF\nAAOCAQ8AMIIBCgKCAQEAlyAKyF5/tJGg2e7VQPwmt8LeH77llDJSw87Lv4lntt5B\nVd/Fy+muGjgKJSikNy3b4SRuD2SefmmjnPdWKjyiJIJTansR/2+5LsVtePXYEP4F\n6fkQpjXeqyQl9VE/BwxiZ0moGI1g2K0V2VLeBB0Lhg6eG5FDarj468FC3XV2p46e\n3xT5Y+53c4VsLEYcM/Nt0p8Sy8YI8V9I8WojupGv/XJRtkB/vKmZFCBwUv4Ej++s\n6f7dx5bmF+Ui0wMU1OLW1N7vTckjyFzsqqPIOelcsAY4sTrpbmrO7aApfArkwUrk\n/FyM6w8CvnVtj6+KiVbmtg4ENlTUQhcb6lTdg4u4jwIDAQABoy4wLDALBgNVHQ8E\nBAMCB4AwHQYDVR0OBBYEFAMojC1bL0GgP3xwsLEgI4+gvUxBMA0GCSqGSIb3DQEB\nCwUAA4IBAQBQF+kfrKTr/wI+jMc1gabgOLyDsVWFCEHNEoYEiO8qJxPsL0+0H1DV\n8tHUMbC++iumXI+rVWZ72mjxAhO+811yHQwb3cnZcth3uPmtVSU+qpr/iC8+T9Za\nN1u1HHhcWsAmjNv/iYnoqfABI2B3lUejvai2qddSznRQFkrcz6iBbiqDmm+owf9p\nP4zzTL2T2EufriwoEm7tCRpqIifaY0FIYCvW8Uaine0JwZpCyQHvFc1/CM0duG8V\nu4hm6PtBrgSs5glslsFYuws4J7GVnkY8Wszeorj7nI+KV54vHVCN1Hnu0gjeEHFy\nyEC1QAPYz2jrAbCsZn5yg8oqK/XDTVDw\n-----END CERTIFICATE-----\n",
+          "multiIssuer.alias": "https://avaloq.com",
+          "multiIssuer.crt": "-----BEGIN CERTIFICATE-----\nMIID6TCCAtGgAwIBAgIJAJ5bYdV1VF8tMA0GCSqGSIb3DQEBCwUAMIGKMQswCQYD\nVQQGEwJVSzEPMA0GA1UECAwGTG9uZG9uMQ8wDQYDVQQHDAZMb25kb24xDzANBgNV\nBAoMBkF2YWxvcTENMAsGA1UECwwEQ0FQSTEXMBUGA1UEAwwOd3d3LmF2YWxvcS5j\nb20xIDAeBgkqhkiG9w0BCQEWEWF2YWxvcUBhdmFsb3EuY29tMB4XDTIxMDkzMDEw\nNTExM1oXDTM1MDYwOTEwNTExM1owgYoxCzAJBgNVBAYTAlVLMQ8wDQYDVQQIDAZM\nb25kb24xDzANBgNVBAcMBkxvbmRvbjEPMA0GA1UECgwGQXZhbG9xMQ0wCwYDVQQL\nDARDQVBJMRcwFQYDVQQDDA53d3cuYXZhbG9xLmNvbTEgMB4GCSqGSIb3DQEJARYR\nYXZhbG9xQGF2YWxvcS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQDBMndIlR2XynG4vFSg9HJ1Cp0OM5M8PF4WR+5FGjKxXeBSbVnAvSkbtOQ10WNZ\nCzSb9AiSP5d+PS2eSzwO8W8dqobX7sU+I0o4DhyUg3YKX12y3YBaEnhPhKiGg1Ml\nTUH6sx94xceH5PITkT1LOWTI0zBXdgCUTxsFIbQu3MWWedO4gJ9juYY289Z0gMYi\ngKZ3r6w+fhI+Z97tKvx57uTmDAr4EBY5OtD0owkY43HtrOahUZiP1d+rPKEeFQN4\n5oo4s2Efp7WT+QeniD6P01HuaHwPvOLwDD05cMNN1hwDRQphGKtZyyVvEXfJLTdG\n5CMpeKF30aPvV8r5081Im33xAgMBAAGjUDBOMB0GA1UdDgQWBBR7ruk+zBIRnaYi\nT4qwxNYUop4MSjAfBgNVHSMEGDAWgBR7ruk+zBIRnaYiT4qwxNYUop4MSjAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCoE7JAZvm6o4C7uUOPud75mpyX\nkx00i2uddwZy92Uq1Fd5iUqEZtlMgrYCLbS86VjUi8UgOrgdePk8Xsuk6tHBtDJ8\nmyJENQbC5p9pWBqyUSFvHwB1F8EQuaJxuLgJl9Zicg4+SsJYgoPcosdf0nQ/8XGN\nN9NF3CaIrnxhGnxR3wFD9XHCPDMve49gI4egrZ+t9lUR1KhqBR5CQDxFIWaLgl8k\n08g0R1VEjhcy8apLTMsojwnU1e1TAPQVOfwIpWeYC5SW6kiTeA6stY91TZnWS8Bf\n0aZb7S1SG7RJ4oZRJUWCAeOvYDeoGqhHcxxBP8mUmn8nXmmMZX1gPJQtUg0C\n-----END CERTIFICATE-----\n",
+          "secondaryidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDiTCCAnGgAwIBAgIJAJrDwFyjNB96MA0GCSqGSIb3DQEBCwUAMFsxCzAJBgNV\nBAYTAkNIMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg\nQ29tcGFueSBMdGQxFzAVBgNVBAMMDldoaXRlbGlzdGVkSURQMB4XDTIxMDQwMTEx\nMDEyN1oXDTM0MTIwOTExMDEyN1owWzELMAkGA1UEBhMCQ0gxFTATBgNVBAcMDERl\nZmF1bHQgQ2l0eTEcMBoGA1UECgwTRGVmYXVsdCBDb21wYW55IEx0ZDEXMBUGA1UE\nAwwOV2hpdGVsaXN0ZWRJRFAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQC1LmCVNG+b17gxGcxVqHYCZJ+W0ByrJaK/rXTs+b4/dXtFJzj3DlRlt2tYvFLd\n0XMg0Vb8+FE8mB1LAKJ7LSzGR0JBXX8SQFRY2juTstdNXynXpXyiphgIOZfjzXGT\nsIo110R1JuyHGtpNevDzCiJxFOVzKlty8Et4tl/C1Y2mv9uOfwxo2rqLTpWn3vCE\nQgMYHd8IcEwMMg2lz9ZKNuDnbXLlOERTljK0ZrS9NTncYA+S8NcAOJS9rocjPKXR\nSZwmF5aVsQ6uT/Wc8zlV9kUeoKrDtllyQQsyQrzih5zQygDj3/kHaT0ta0Hs1yj4\nMbtTzmqTldZQiXw5IGJuIPODAgMBAAGjUDBOMB0GA1UdDgQWBBTVG2uKYOElcEP9\nKIOgnUI8XK83BjAfBgNVHSMEGDAWgBTVG2uKYOElcEP9KIOgnUI8XK83BjAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCAS4pdaBhXXilmUarnq94gEFRc\nEBa1QAI8yTcYOPliUrYdNsVz1ybaNfZ+wsHNFuO5aOdkmETWqGKYRKGJNeyRfz9W\nWIzBlxhZ93d4VfdV96tmfz2pG+CwWsovXIlplEVs5fPcy+2eJ5FgBJKgRn2oYRAB\nZnltn+iy6QnsS87OLJOSYmR+fuyjh0hO3hnr8Noa3tXXObJdEsrzjBeKfDiXvKbL\nvVkpUg1zrNv0SKz/Ng+BeSF9jQTPih0dNKIOjg6JDGVVyYiUMy0ul1UbvyjNjH6I\n8cdaLf4/0pdLskclHwW4GxcG5IgUhzb5+y8i7aGhY7Fwckn40aRGfyaZCBHI\n-----END CERTIFICATE-----\n"
         }
       }
     }
@@ -116,26 +235,73 @@
     "container_name": "avaloq-aca-specs",
     "command": ["/bin/sh"],
     "arguments": ["-c", "CMD=$(grep '^exec java' /opt/avaloq/run-java.sh); memory_opts='-XX:MaxRAMPercentage=90 -XX:InitialRAMPercentage=70'; eval $CMD"],
-    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-specifications:0.53.1",
+    "container_image_url": "registry.service.avaloq.com/avaloq/avaloq-community-api-specifications:0.65.0",
     "env_variables": {
-      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "",
+      "AVALOQ_COMMUNITY_API_SPECIFICATIONS_PUBLIC_BU": "1",
       "AVALOQ_COMMUNITY_API_SPECIFICATIONS_SHAPES_DIR": "/opt/avaloq/community/api/specifications/shapes",
-      "AVALOQ_COMMUNITY_API_REST_URL_LIST": "https://avaloq-aca-rest:8080",
-      "AVALOQ_COMMUNITY_API_KAFKA_SPECIFICATION_BDE_ENTITIES_WHITELIST": "",
-      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_URL": "jdbc://test",
-      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_SCHEMA": "test",
-      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_DRIVER_CLASSNAME": "test",
-      "AVALOQ_COMMUNITY_API_ACA_SPECS_DATASOURCE_MAX_LIFETIME": "1800000"
+      "AVALOQ_COMMUNITY_API_REST_URL_LIST": "https://10.0.1.90:8080",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_URL": "jdbc:oracle:thin:@//acp.sub09210916211.capi.oraclevcn.com:1522/acp",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_SCHEMA": "community_api",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DB_DRIVER_CLASSNAME": "oracle.jdbc.driver.OracleDriver",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_DATASOURCE_MAX_LIFETIME": "1800000",
+      "AVALOQ_AWS_API_SPECIFICATIONS_AMI_WEB_SERVICES_URL": "http://10.0.1.238:8080",
+      "AVALOQ_COMMUNITY_API_ACA_SPECS_SECURITY_ENABLED": "true",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENLOGCLAIMS": "sub,iss,avq_roles,avq_bu,aud",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDAUDIENCE": "AVALOQ,EBANKING",
+      "AVALOQ_CHASSIS_SECURITY_JWT_AUTHTOKENWHITELISTEDISSUER": "MedusaIDP"
     },
     "shape": "CI.Standard.E4.Flex",
     "cpu": 2,
     "mem": 4,
     "volumes": {
+      "avaloq-community-api-specifications-shapes": {
+        "path": "/opt/avaloq/community/api/specifications/shapes",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "crypto-plugin-acp-business-partner.yml": "entities:\n  obj-bp:\n    shapes:\n      - name: crypto-business-partner\n        version: 1.0.0\n        content: |\n          {\n            id\n            extn{\n              bpNr{\n                val\n              }\n              bpSym{\n                val\n              }\n            }\n            objNameList {\n              dateValid\n              dateValidTo\n              name\n            }\n          }",
+          "crypto-plugin-acp-portfolio-shape.yml": "entities:\n  obj-cont:\n    shapes:\n      - name: crypto-portfolio\n        version: 1.0.1\n        content: |\n          {\n            id\n            bp\n            bu\n            extn{\n                contSym\n            }\n            sortNr\n            refCurryList\n          }",
+          "crypto-plugin-acp-position-shape.yml": "entities:\n  obj-pos:\n    shapes:\n      - name: crypto-position\n        version: 1.0.0\n        content: |\n          {\n            id\n            currValPos\n            #qty\n            bu {\n              _href\n              id\n              keyList {\n                objKey {\n                  _href\n                  id\n                  intlId\n                }\n                val\n              }\n            }\n            asset {\n              _href\n              id\n              keyList {\n                objKey {\n                  _href\n                  id\n                  intlId\n                }\n                val\n              }\n            }\n          }"
+        }
+      },
       "avaloq-community-api-specifications-config-secret": {
         "path": "/opt/avaloq/config",
         "volume_type": "CONFIGFILE",
         "configs": {
-          "application.secrets": "spring.datasource.username=test\nspring.datasource.password=test"
+          "application.secrets": "spring.datasource.username=community_api\nspring.datasource.password=<removed>\navaloq.chassis.security.jwt.authTokenPublicKey=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlyAKyF5/tJGg2e7VQPwmt8LeH77llDJSw87Lv4lntt5BVd/Fy+muGjgKJSikNy3b4SRuD2SefmmjnPdWKjyiJIJTansR/2+5LsVtePXYEP4F6fkQpjXeqyQl9VE/BwxiZ0moGI1g2K0V2VLeBB0Lhg6eG5FDarj468FC3XV2p46e3xT5Y+53c4VsLEYcM/Nt0p8Sy8YI8V9I8WojupGv/XJRtkB/vKmZFCBwUv4Ej++s6f7dx5bmF+Ui0wMU1OLW1N7vTckjyFzsqqPIOelcsAY4sTrpbmrO7aApfArkwUrk/FyM6w8CvnVtj6+KiVbmtg4ENlTUQhcb6lTdg4u4jwIDAQAB"
+        }
+      },
+      "https-cert-community-api-rest": {
+        "path": "/opt/avaloq/capi-rest/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIID/zCCAuegAwIBAgIIYburg9nSfHcwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwNTNaFw0yNDEwMzAxNDAwNTRaMDAxLjAsBgNVBAMTJWF2YWxv\ncS1hY2EtcmVzdC5hbGwtY29uc3RlbGxhdGlvbi5zdmMwggEiMA0GCSqGSIb3DQEB\nAQUAA4IBDwAwggEKAoIBAQC2uqvTwcvLKsuTfYNBJ8WvLVyLFkrnamM/0bDNQa82\nCfe68y9q5aqIZAA4fhNII7DaTrJIfovJ/7AsCth0Ov3MUsE5bUm/t9u8++W9gDPE\nG7bKmCCk32f4YyAqXHEHSmmU4s9fE/hQjF/xbTtMlGtQNtMmU9reeZ6gu7RiGhiH\nZTSrjrrp1f3lkVa54MbfulQke8k+Z6BR0nRzboG88kg6KYpsgeXLG/TdBu/DppED\nYXXgZtuLCh07Hdkuali/0KnG8QwBMg3qABjfQcAij1JLupRS1cYRp8RsA/A9vHOx\nc3AL6Jb+4oVqLQGdG6GZQmuy7hecAgw5pvCCmkvLP8fHAgMBAAGjggEVMIIBETAO\nBgNVHQ8BAf8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIw\nADAdBgNVHQ4EFgQU/+yNVTrxdxWYr5TiDVifxKB38I8wHwYDVR0jBBgwFoAUdWHt\ngZRw/U6ZyhCyhhCKLm88wUowZQYDVR0RBF4wXIIlYXZhbG9xLWFjYS1yZXN0LmFs\nbC1jb25zdGVsbGF0aW9uLnN2Y4IzYXZhbG9xLWFjYS1yZXN0LmFsbC1jb25zdGVs\nbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDRjMWU3\nYzRmLTc0N2EtNDMwNC05OWUwLTc1NDMwMTczMjkyYTANBgkqhkiG9w0BAQsFAAOC\nAQEABsMvSZn3O9jaqOQgzOCsOaUt15pyjNHSVBpdWt5emFEBf71/kxpz3rjHGyIw\n0QT/Mjq21rYFFj8dQEBEbyuqvhdMUJmqjYSUl3Ac1Y4CNTlm2O9bTs3foeMRs0cX\nvMxsmnR7Y4HHmdhA2ntG+vmjkl6zGF2fxktDy6PvrqBcbOPkD1lH/9vWbXWsQu8D\nDVQcZoLzP2ppntQ7hzq0DpZBmy1p31dGEx89DTngxA1/Yh8MUbHn8ZcZNyuai4wb\nHCsmnaoYctYilp1quSNLRWF//+trMkF+xNowqXdHIUbPgzHqycDp+E07rBgZPJHu\nuprIgIM2CfYJ48UJbyvnnO8S3g==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
+        }
+      },
+      "https-cert-community-api-aca-specifications": {
+        "path": "/opt/avaloq/capi-specs/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "tls.crt": "-----BEGIN CERTIFICATE-----\nMIIEAjCCAuqgAwIBAgIIVSEVCGdmxmQwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjEwMzExNDAwMzJaFw0yNDEwMzAxNDAwMzNaMDExLzAtBgNVBAMTJmF2YWxv\ncS1hY2Etc3BlY3MuYWxsLWNvbnN0ZWxsYXRpb24uc3ZjMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEA43RXvfvohtDxw1DJoOeh70Wic8H/dzO5sKpvaErb\nHHP3XGQ/16dlbx5me+y90/4dRn535L6LVoNErO5zZ4qQasHYCDcYjYjQFozBfPW/\n6mJPd6va8xff3lGScCVLsMMrgshSBdiXyLrqZZVGslT9H+FjybIIii6rkrh8OzD0\nNlUSnXUNR79v3tGmxXRz9LnRaoIuxZY7WdtT8RdHumdvqFkibiSYZU48wfTFvm63\nWFVY5HbVcisZkn2TXbkklt+fiYvijLRCzV0XIo/XH0F26qN9/Tnjm8+jDA1QXppt\npKujjxKscATHctKBGG24UqMux1xpA5W2A8A/jkU1IM7bjQIDAQABo4IBFzCCARMw\nDgYDVR0PAQH/BAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAwGA1UdEwEB/wQC\nMAAwHQYDVR0OBBYEFNZNVjXHkqHLPBiqJVGzOrntclmYMB8GA1UdIwQYMBaAFHVh\n7YGUcP1OmcoQsoYQii5vPMFKMGcGA1UdEQRgMF6CJmF2YWxvcS1hY2Etc3BlY3Mu\nYWxsLWNvbnN0ZWxsYXRpb24uc3ZjgjRhdmFsb3EtYWNhLXNwZWNzLmFsbC1jb25z\ndGVsbGF0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsMDUGCysGAQQBkggRZAIBBCYTJDgw\nYjFkMTg5LTc2ZTAtNDZhMy1hNjZhLTFhOWQ2OWUzZjE0YzANBgkqhkiG9w0BAQsF\nAAOCAQEAuw79vC0L/cI05CQOAMw215RtS4aPILk50ddQShq+bOBE+RYEXK1fS0vB\nm6FDsNisHgHf8l6vJzVJtfvWJBZV7chgFQtYjEK4AMzWGpOWN8NhdWMjvv5RwxEq\nrRO+3XhPdzTqovJpEO6xOtbsKAclFVEwsjYCn+7jSY9NTVKRz+o/fFOrwKjmnkUz\nJ3SLZW31+6icvlvU7e76COlQtsERORjESu8zm6mgoHg24cfOnsyW3TRYQZw2vPmh\nMYO2RGcS2notOvGnzPXs3xyqhELRBRck0mZshR0Fyahs0GjaC0g2cX1hfS6/forL\n+VHTYlVjlpmF3SvC7BQJE6fKebKPog==\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIDUTCCAjmgAwIBAgIIEet7ZnTk1KEwDQYJKoZIhvcNAQELBQAwNjE0MDIGA1UE\nAwwrb3BlbnNoaWZ0LXNlcnZpY2Utc2VydmluZy1zaWduZXJAMTY0NTA5MTY5OTAe\nFw0yMjAyMTcwOTU0NThaFw0yNDA0MTcwOTU0NTlaMDYxNDAyBgNVBAMMK29wZW5z\naGlmdC1zZXJ2aWNlLXNlcnZpbmctc2lnbmVyQDE2NDUwOTE2OTkwggEiMA0GCSqG\nSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDYyNpeCdZstskWoOPPrSSfgeH0/dv51aS\n6bGYw2wPH7SNUBkjWGXetTjFCBq4HLIh6ETeFEn0sRryGhLLxehQJVK2WZdpqCts\nNld5AsarBH867Uex+sDzjYbbqg8C4a+DnCsEzmz4DXVLiwMhnhE3U/oiGM+ekjGh\nEqi9BSAzuqNmFWDUhSHwvCZjqr5zLN3J3k0W6rOjcKm05yNTiTFS2ulsSpC1EuUu\n/jqyMPBYMvYjWQjO/G+GjL2Kbcgi2vBafF1r7/47AVjrPJhrC2XASsbgSn6mVlmO\n+x+Y9EPs2V0yEHEv7scKPIN7FPVArukDn3SRQZFHo4x6DDox1+l5AgMBAAGjYzBh\nMA4GA1UdDwEB/wQEAwICpDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR1Ye2B\nlHD9TpnKELKGEIoubzzBSjAfBgNVHSMEGDAWgBR1Ye2BlHD9TpnKELKGEIoubzzB\nSjANBgkqhkiG9w0BAQsFAAOCAQEATgW3JZAfrzhU5kdFIYbzMmVw0mHPfWkewHGu\nLsQZwZ4gx+HBVMFfxsnaUG4taymOKgF6qtgzX22TB1QhlgjfHWIVJ8d7SJ/KJZex\nLOn0Q6aEHjdYHjXXB3tkl6aCEMnIIb/LmzJLEeqlbDKGaWa4lPyKt/dwGZDYwOwI\nPuh+NGrNIrFyEhCGlPFv7inLrRN7Fj4PLT5tXnPF/5NLCnEGKuevBdCaJhYpVZHR\n3/Ef0Paret0OmKJGRLH6kFg4hXAu5W0d2Y1UuOFqavKu/krGzgSHPb/FZQ7fo8l7\nE2IyCz17qbIAAr9YYvebi8jk6o1M+V4EAgRZEMi4MAwWiNdVsQ==\n-----END CERTIFICATE-----",
+          "tls.key": "<removed>"
+        }
+      },
+      "avaloq-community-api-aws-https": {
+        "path": "/opt/avaloq/avaloq-aws/https-cert",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          ".gitkeep": "aa"
+        }
+      },
+      "jwt-certificates": {
+        "path": "/opt/avaloq/jwt",
+        "volume_type": "CONFIGFILE",
+        "configs": {
+          "asyncidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDnTCCAoWgAwIBAgIUYXpe3RVADczoSHNht/IfJBenZf4wDQYJKoZIhvcNAQEL\nBQAwXjELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM\nGEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDEXMBUGA1UEAwwOV2hpdGVsaXN0ZWRJ\nRFAwHhcNMjIwMjAxMDUzNzIxWhcNMzUxMDExMDUzNzIxWjBeMQswCQYDVQQGEwJB\nVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50ZXJuZXQgV2lkZ2l0\ncyBQdHkgTHRkMRcwFQYDVQQDDA5XaGl0ZWxpc3RlZElEUDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBAOTXOexYE/gba3s4k1wHsXNmKVKxi44LmyBAG1tS\nhVD4txQpl6yttk6pIjeqCAusVVmC1k04CRfsCJSU7eqtd+yARFZUUCnIfKhUoW1F\noS3f8ihQHcrEn4wfR0MJWol+4M5NFDgI3H99SMYEfzeFuOXdEqdF4L4+xUPr25st\nawbXNLUvAiYXtO5E+fFZ8oX/ez96viX1ocXktkRuXvGVlMQqZPLqaMug4PxPKHQG\nnFONbE1+JEY6eW3Bp8/6GO92HCe6bTHcT1iC9VYY1NNEAlRxfs0aVu/K6ylqyXxi\n9Wqr9mavQNK+ucnoR5o4TEhw+OPNCGQV044UfQkQ9NA/51MCAwEAAaNTMFEwHQYD\nVR0OBBYEFDMJAuU3HKBYgUma/9H10YDu6pc0MB8GA1UdIwQYMBaAFDMJAuU3HKBY\ngUma/9H10YDu6pc0MA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB\nAOMOAjjEmvBK43bgNiE4/SKUitdlukpnMqxlH1kHKeTL0vs8OU9Glsr7N5eVRXDI\nyl7a8OIJHOX9RXxByAFDdJuGVnL62k8QzbY+fHtO3xMhmj+KDnTXS4CEPuFjtaDQ\n4IjysKIOG3y2gdbjt6qusxWDJu/akbpyTIbcaw/5RGQ9hRCLeC/UQ4RANCdYAc2m\nMS35Qgse887G3zATUbBpzS6WJD/ZXKWUoXtFPbq7L1YRiT1YMbWf/jg/mC0KUv0s\nMMx/7ZtCbmFFdftu5kDABFAaaanYs/rf2IaQADuOLt94Pe6n/U6BVZMsWfOge+c7\nFA2eb6dJ+xaolLfRp8TFJi4=\n-----END CERTIFICATE-----",
+          "medusaidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDpDCCAoygAwIBAgIEBBKDeTANBgkqhkiG9w0BAQsFADB8MQswCQYDVQQGEwJD\nSDELMAkGA1UECBMCWkgxDzANBgNVBAcTBlp1cmljaDEcMBoGA1UEChMTQXZhbG9x\nIEV2b2x1dGlvbiBBRzEOMAwGA1UECxMFRnJvbnQxITAfBgNVBAMTGEF2YWxvcSBG\ncm9udCBUZXN0IE1lZHVzYTAeFw0xODA4MjExMjE1MTJaFw0yODA4MTgxMjE1MTJa\nMHwxCzAJBgNVBAYTAkNIMQswCQYDVQQIEwJaSDEPMA0GA1UEBxMGWnVyaWNoMRww\nGgYDVQQKExNBdmFsb3EgRXZvbHV0aW9uIEFHMQ4wDAYDVQQLEwVGcm9udDEhMB8G\nA1UEAxMYQXZhbG9xIEZyb250IFRlc3QgTWVkdXNhMIIBIjANBgkqhkiG9w0BAQEF\nAAOCAQ8AMIIBCgKCAQEAlyAKyF5/tJGg2e7VQPwmt8LeH77llDJSw87Lv4lntt5B\nVd/Fy+muGjgKJSikNy3b4SRuD2SefmmjnPdWKjyiJIJTansR/2+5LsVtePXYEP4F\n6fkQpjXeqyQl9VE/BwxiZ0moGI1g2K0V2VLeBB0Lhg6eG5FDarj468FC3XV2p46e\n3xT5Y+53c4VsLEYcM/Nt0p8Sy8YI8V9I8WojupGv/XJRtkB/vKmZFCBwUv4Ej++s\n6f7dx5bmF+Ui0wMU1OLW1N7vTckjyFzsqqPIOelcsAY4sTrpbmrO7aApfArkwUrk\n/FyM6w8CvnVtj6+KiVbmtg4ENlTUQhcb6lTdg4u4jwIDAQABoy4wLDALBgNVHQ8E\nBAMCB4AwHQYDVR0OBBYEFAMojC1bL0GgP3xwsLEgI4+gvUxBMA0GCSqGSIb3DQEB\nCwUAA4IBAQBQF+kfrKTr/wI+jMc1gabgOLyDsVWFCEHNEoYEiO8qJxPsL0+0H1DV\n8tHUMbC++iumXI+rVWZ72mjxAhO+811yHQwb3cnZcth3uPmtVSU+qpr/iC8+T9Za\nN1u1HHhcWsAmjNv/iYnoqfABI2B3lUejvai2qddSznRQFkrcz6iBbiqDmm+owf9p\nP4zzTL2T2EufriwoEm7tCRpqIifaY0FIYCvW8Uaine0JwZpCyQHvFc1/CM0duG8V\nu4hm6PtBrgSs5glslsFYuws4J7GVnkY8Wszeorj7nI+KV54vHVCN1Hnu0gjeEHFy\nyEC1QAPYz2jrAbCsZn5yg8oqK/XDTVDw\n-----END CERTIFICATE-----\n",
+          "multiIssuer.alias": "https://avaloq.com",
+          "multiIssuer.crt": "-----BEGIN CERTIFICATE-----\nMIID6TCCAtGgAwIBAgIJAJ5bYdV1VF8tMA0GCSqGSIb3DQEBCwUAMIGKMQswCQYD\nVQQGEwJVSzEPMA0GA1UECAwGTG9uZG9uMQ8wDQYDVQQHDAZMb25kb24xDzANBgNV\nBAoMBkF2YWxvcTENMAsGA1UECwwEQ0FQSTEXMBUGA1UEAwwOd3d3LmF2YWxvcS5j\nb20xIDAeBgkqhkiG9w0BCQEWEWF2YWxvcUBhdmFsb3EuY29tMB4XDTIxMDkzMDEw\nNTExM1oXDTM1MDYwOTEwNTExM1owgYoxCzAJBgNVBAYTAlVLMQ8wDQYDVQQIDAZM\nb25kb24xDzANBgNVBAcMBkxvbmRvbjEPMA0GA1UECgwGQXZhbG9xMQ0wCwYDVQQL\nDARDQVBJMRcwFQYDVQQDDA53d3cuYXZhbG9xLmNvbTEgMB4GCSqGSIb3DQEJARYR\nYXZhbG9xQGF2YWxvcS5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQDBMndIlR2XynG4vFSg9HJ1Cp0OM5M8PF4WR+5FGjKxXeBSbVnAvSkbtOQ10WNZ\nCzSb9AiSP5d+PS2eSzwO8W8dqobX7sU+I0o4DhyUg3YKX12y3YBaEnhPhKiGg1Ml\nTUH6sx94xceH5PITkT1LOWTI0zBXdgCUTxsFIbQu3MWWedO4gJ9juYY289Z0gMYi\ngKZ3r6w+fhI+Z97tKvx57uTmDAr4EBY5OtD0owkY43HtrOahUZiP1d+rPKEeFQN4\n5oo4s2Efp7WT+QeniD6P01HuaHwPvOLwDD05cMNN1hwDRQphGKtZyyVvEXfJLTdG\n5CMpeKF30aPvV8r5081Im33xAgMBAAGjUDBOMB0GA1UdDgQWBBR7ruk+zBIRnaYi\nT4qwxNYUop4MSjAfBgNVHSMEGDAWgBR7ruk+zBIRnaYiT4qwxNYUop4MSjAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCoE7JAZvm6o4C7uUOPud75mpyX\nkx00i2uddwZy92Uq1Fd5iUqEZtlMgrYCLbS86VjUi8UgOrgdePk8Xsuk6tHBtDJ8\nmyJENQbC5p9pWBqyUSFvHwB1F8EQuaJxuLgJl9Zicg4+SsJYgoPcosdf0nQ/8XGN\nN9NF3CaIrnxhGnxR3wFD9XHCPDMve49gI4egrZ+t9lUR1KhqBR5CQDxFIWaLgl8k\n08g0R1VEjhcy8apLTMsojwnU1e1TAPQVOfwIpWeYC5SW6kiTeA6stY91TZnWS8Bf\n0aZb7S1SG7RJ4oZRJUWCAeOvYDeoGqhHcxxBP8mUmn8nXmmMZX1gPJQtUg0C\n-----END CERTIFICATE-----\n",
+          "secondaryidp.crt": "-----BEGIN CERTIFICATE-----\nMIIDiTCCAnGgAwIBAgIJAJrDwFyjNB96MA0GCSqGSIb3DQEBCwUAMFsxCzAJBgNV\nBAYTAkNIMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQg\nQ29tcGFueSBMdGQxFzAVBgNVBAMMDldoaXRlbGlzdGVkSURQMB4XDTIxMDQwMTEx\nMDEyN1oXDTM0MTIwOTExMDEyN1owWzELMAkGA1UEBhMCQ0gxFTATBgNVBAcMDERl\nZmF1bHQgQ2l0eTEcMBoGA1UECgwTRGVmYXVsdCBDb21wYW55IEx0ZDEXMBUGA1UE\nAwwOV2hpdGVsaXN0ZWRJRFAwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQC1LmCVNG+b17gxGcxVqHYCZJ+W0ByrJaK/rXTs+b4/dXtFJzj3DlRlt2tYvFLd\n0XMg0Vb8+FE8mB1LAKJ7LSzGR0JBXX8SQFRY2juTstdNXynXpXyiphgIOZfjzXGT\nsIo110R1JuyHGtpNevDzCiJxFOVzKlty8Et4tl/C1Y2mv9uOfwxo2rqLTpWn3vCE\nQgMYHd8IcEwMMg2lz9ZKNuDnbXLlOERTljK0ZrS9NTncYA+S8NcAOJS9rocjPKXR\nSZwmF5aVsQ6uT/Wc8zlV9kUeoKrDtllyQQsyQrzih5zQygDj3/kHaT0ta0Hs1yj4\nMbtTzmqTldZQiXw5IGJuIPODAgMBAAGjUDBOMB0GA1UdDgQWBBTVG2uKYOElcEP9\nKIOgnUI8XK83BjAfBgNVHSMEGDAWgBTVG2uKYOElcEP9KIOgnUI8XK83BjAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCAS4pdaBhXXilmUarnq94gEFRc\nEBa1QAI8yTcYOPliUrYdNsVz1ybaNfZ+wsHNFuO5aOdkmETWqGKYRKGJNeyRfz9W\nWIzBlxhZ93d4VfdV96tmfz2pG+CwWsovXIlplEVs5fPcy+2eJ5FgBJKgRn2oYRAB\nZnltn+iy6QnsS87OLJOSYmR+fuyjh0hO3hnr8Noa3tXXObJdEsrzjBeKfDiXvKbL\nvVkpUg1zrNv0SKz/Ng+BeSF9jQTPih0dNKIOjg6JDGVVyYiUMy0ul1UbvyjNjH6I\n8cdaLf4/0pdLskclHwW4GxcG5IgUhzb5+y8i7aGhY7Fwckn40aRGfyaZCBHI\n-----END CERTIFICATE-----\n"
         }
       }
     }
